@@ -6,14 +6,14 @@
     <title>Ing. Eduardo Buendía | Portafolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* --- ESTILO DARK MODE --- */
+        /* --- ESTILO APPLE DARK MODE PRO --- */
         :root {
             --bg-color: #000000;
             --card-bg: #1c1c1e;
             --text-main: #f5f5f7;
             --text-muted: #86868b;
-            --accent-color: #2997ff; /* Azul brillante para botones */
-            --pdf-blue: #0a2342; /* Azul oscuro elegante */
+            --accent-color: #2997ff;
+            --overlay-bg: rgba(0, 0, 0, 0.8);
         }
 
         body {
@@ -25,17 +25,13 @@
             overflow-x: hidden;
         }
 
-        /* --- ANIMACIONES (LA MAGIA) --- */
+        /* --- ANIMACIONES DE ENTRADA --- */
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- ENCABEZADO --- */
         header {
@@ -49,19 +45,14 @@
 
         h1 {
             font-size: 3.5rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 10px;
-            letter-spacing: -0.02em;
             background: linear-gradient(180deg, #fff, #888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            font-weight: 300;
-        }
+        .subtitle { color: var(--text-muted); font-size: 1.5rem; font-weight: 300; }
 
         .btn {
             margin-top: 40px;
@@ -71,30 +62,19 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: transform 0.3s ease;
+            transition: transform 0.2s;
             display: inline-block;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
         }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(41, 151, 255, 0.4);
-        }
+        .btn:hover { transform: scale(1.05); }
 
         /* --- SECCIONES --- */
-        .container {
-            width: 85%;
-            max-width: 1000px;
-            margin: auto;
-            padding: 100px 0;
-        }
+        .container { width: 85%; max-width: 1000px; margin: auto; padding: 100px 0; }
+        h2 { font-size: 2.5rem; margin-bottom: 50px; }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--text-main);
-        }
-
-        /* --- TARJETAS --- */
+        /* --- TARJETAS INTERACTIVAS --- */
         .grid-proyectos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -105,14 +85,32 @@
             background-color: var(--card-bg);
             border-radius: 20px;
             padding: 30px;
-            transition: transform 0.4s ease;
+            transition: all 0.3s ease;
             border: 1px solid #333;
+            cursor: pointer; /* Manita al pasar el mouse */
+            position: relative;
         }
 
         .tarjeta:hover {
             transform: translateY(-10px);
             border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(41, 151, 255, 0.15);
         }
+
+        .click-hint {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--accent-color);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tarjeta:hover .click-hint { opacity: 1; }
 
         .imagen-proyecto {
             width: 100%;
@@ -122,41 +120,68 @@
             margin-bottom: 20px;
             filter: brightness(0.8);
             transition: filter 0.3s ease;
-            background-color: #333; /* Fondo gris si no carga la imagen */
+            background-color: #333;
         }
 
-        .tarjeta:hover .imagen-proyecto {
-            filter: brightness(1.1);
+        .tarjeta:hover .imagen-proyecto { filter: brightness(1.1); }
+
+        .tech-tag { font-size: 0.8rem; color: var(--accent-color); text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
+
+        /* --- VENTANAS EMERGENTES (MODALES) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px); /* Efecto vidrio borroso Apple */
+            z-index: 1000;
+            display: none; /* Oculto por defecto */
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        h3 {
-            font-size: 1.5rem;
-            margin: 10px 0;
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #1c1c1e;
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #444;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open .modal-content { transform: scale(1); }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #333;
             color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
         }
+        
+        .modal-details h3 { color: var(--accent-color); margin-top: 20px; font-size: 1.1rem; }
+        .modal-details ul { padding-left: 20px; color: #ccc; }
+        .modal-details li { margin-bottom: 10px; }
 
-        .tech-tag {
-            font-size: 0.8rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        /* --- PIE DE PÁGINA --- */
-        footer {
-            background-color: #050505;
-            padding: 80px 0;
-            border-top: 1px solid #333;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        footer a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin: 0 15px;
-        }
+        footer { background-color: #050505; padding: 80px 0; border-top: 1px solid #333; text-align: center; color: var(--text-muted); }
+        footer a { color: var(--text-main); text-decoration: none; margin: 0 15px; }
     </style>
 </head>
 <body>
@@ -166,7 +191,7 @@
             <h1>Ing. Eduardo Buendía</h1>
             <p class="subtitle">Diseño de Producto | Manufactura | Herramentales</p>
             <p style="color: var(--text-muted); margin-top: 20px;">SolidWorks / Inventor / Ansys</p>
-            <a href="#proyectos" class="btn">Ver Proyectos</a>
+            <a href="#proyectos" class="btn">Ver Proyectos Interactivos</a>
         </div>
     </header>
 
@@ -178,56 +203,103 @@
                 Me especializo en transformar problemas complejos en soluciones funcionales mediante 
                 diseño CAD de alta precisión y validación por elemento finito.
             </p>
-            <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 800px; margin-top: 20px;">
-                Mi enfoque combina la estética del diseño de producto con la ingeniería rigurosa para 
-                asegurar la manufacturabilidad.
-            </p>
         </div>
     </section>
 
     <section id="proyectos" class="container">
-        <h2 class="reveal">Ingeniería Aplicada</h2>
+        <h2 class="reveal">Proyectos de Ingeniería</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">(Haz clic en una tarjeta para ver la ingeniería a detalle)</p>
         
         <div class="grid-proyectos">
             
-            <div class="tarjeta reveal">
+            <div class="tarjeta reveal" onclick="openModal('modal1')">
+                <span class="click-hint">+ Ver Detalles</span>
                 <img src="licuadora.png" alt="Licuadora" class="imagen-proyecto">
                 <p class="tech-tag">Ingeniería Inversa</p>
                 <h3>Licuadora Industrial</h3>
-                <p style="color: var(--text-muted);">
-                    Análisis integral de manufactura. Metrología de precisión y modelado paramétrico 
-                    para validación de ensamble en ABS y Acero Inoxidable.
-                </p>
+                <p style="color: var(--text-muted);">Validación de manufactura y ensamble mediante metrología.</p>
             </div>
 
-            <div class="tarjeta reveal">
+            <div class="tarjeta reveal" onclick="openModal('modal2')">
+                <span class="click-hint">+ Ver Detalles</span>
                 <img src="exoesqueleto.png" alt="Exoesqueleto" class="imagen-proyecto">
                 <p class="tech-tag">Diseño Biomecánico</p>
                 <h3>Exoesqueleto Pasivo</h3>
-                <p style="color: var(--text-muted);">
-                    Dispositivo ergonómico para prevención de lesiones.
-                    Validación estructural FEA para asegurar factor de seguridad ante cargas dinámicas.
-                </p>
+                <p style="color: var(--text-muted);">Prevención de lesiones con validación FEA bajo normas NOM.</p>
             </div>
 
-            <div class="tarjeta reveal">
+            <div class="tarjeta reveal" onclick="openModal('modal3')">
+                <span class="click-hint">+ Ver Detalles</span>
                 <img src="extractor.png" alt="Extractor" class="imagen-proyecto">
                 <p class="tech-tag">Herramentales (Fixtures)</p>
                 <h3>Extractor de Baleros</h3>
-                <p style="color: var(--text-muted);">
-                    Solución compacta para mantenimiento en espacios restringidos. 
-                    Accionado neumáticamente y diseñado a medida.
-                </p>
+                <p style="color: var(--text-muted);">Solución neumática compacta para mantenimiento.</p>
             </div>
 
         </div>
     </section>
 
+    <div id="modal1" class="modal-overlay" onclick="closeModal('modal1')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('modal1')">X</button>
+            <h2>Ingeniería Inversa: Licuadora</h2>
+            <img src="licuadora.png" style="width:100%; border-radius:10px;">
+            <div class="modal-details">
+                <h3>Objetivo</h3>
+                [cite_start]<p>Análisis integral de producto para validación de manufactura y ensamble[cite: 22].</p>
+                <h3>Metodología Técnica</h3>
+                <ul>
+                    [cite_start]<li>Desensamble y metrología de precisión de componentes críticos[cite: 25].</li>
+                    [cite_start]<li>Identificación de materiales: ABS para carcasas y Acero Inoxidable para cuchillas[cite: 26].</li>
+                    [cite_start]<li>Validación de propiedades físicas (Masa Real vs. CAD)[cite: 30].</li>
+                    [cite_start]<li>Aplicación de GD&T en planos para asegurar intercambiabilidad[cite: 59].</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal-overlay" onclick="closeModal('modal2')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('modal2')">X</button>
+            <h2>Exoesqueleto Pasivo</h2>
+            <img src="exoesqueleto.png" style="width:100%; border-radius:10px;">
+            <div class="modal-details">
+                <h3>Contexto</h3>
+                [cite_start]<p>Dispositivo enfocado en mujeres para actividades de levantamiento repetitivo, siguiendo Normas Oficiales Mexicanas (NOM)[cite: 66, 77].</p>
+                <h3>Desarrollo de Ingeniería</h3>
+                <ul>
+                    [cite_start]<li>Estudio antropométrico específico para la demografía femenina[cite: 78].</li>
+                    [cite_start]<li>Validación estructural mediante simulación por Elemento Finito (ANSYS)[cite: 81].</li>
+                    [cite_start]<li>Cálculo de Factor de Seguridad para cargas dinámicas[cite: 83].</li>
+                    [cite_start]<li>Selección de materiales basada en cálculos analíticos de esfuerzos[cite: 80].</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal-overlay" onclick="closeModal('modal3')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('modal3')">X</button>
+            <h2>Fixture: Extractor de Baleros</h2>
+            <img src="extractor.png" style="width:100%; border-radius:10px;">
+            <div class="modal-details">
+                <h3>El Desafío</h3>
+                [cite_start]<p>Mantenimiento imposible con herramientas convencionales debido a restricciones geométricas severas[cite: 92].</p>
+                <h3>Solución Mecánica</h3>
+                <ul>
+                    [cite_start]<li>Diseño de dispositivo compacto accionado mediante pistola neumática[cite: 91].</li>
+                    [cite_start]<li>Levantamiento dimensional de alta precisión del área de trabajo[cite: 90].</li>
+                    <li>Validación de colisiones y accesibilidad en ensamble CAD.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="reveal">
             <h2>Contacto</h2>
-            <p style="font-size: 1.5rem; color: white;">ing.eduardo.buendia.ramirez@gmail.com</p>
-            <p style="color: var(--text-muted);">+52 55 1804 8946</p>
+            <p>ing.eduardo.buendia.ramirez@gmail.com</p>
+            <p>+52 55 1804 8946</p>
             <br>
             <a href="#">LinkedIn</a>
             <a href="#">GrabCAD</a>
@@ -235,17 +307,24 @@
     </footer>
 
     <script>
+        // Animación Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-        document.querySelectorAll('.reveal').forEach((el) => {
-            observer.observe(el);
-        });
+        // Lógica de Modals (Ventanas)
+        function openModal(id) {
+            document.getElementById(id).classList.add('open');
+            document.body.style.overflow = 'hidden'; // Evita scroll al abrir
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
+            document.body.style.overflow = 'auto'; // Reactiva scroll
+        }
     </script>
 
 </body>
