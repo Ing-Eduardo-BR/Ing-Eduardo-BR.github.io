@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ing. Eduardo Buendía | Portafolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- ESTILO DARK MODE --- */
+        :root {
+            --bg-color: #000000;
+            --card-bg: #1c1c1e;
+            --text-main: #f5f5f7;
+            --text-muted: #86868b;
+            --accent-color: #2997ff; /* Azul brillante para botones */
+            --pdf-blue: #0a2342; /* Azul oscuro elegante */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMACIONES (LA MAGIA) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- ENCABEZADO --- */
+        header {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 70%);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(180deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            margin-top: 40px;
+            padding: 12px 30px;
+            border-radius: 980px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(41, 151, 255, 0.4);
+        }
+
+        /* --- SECCIONES --- */
+        .container {
+            width: 85%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 100px 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--text-main);
+        }
+
+        /* --- TARJETAS --- */
+        .grid-proyectos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .tarjeta {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            transition: transform 0.4s ease;
+            border: 1px solid #333;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+        }
+
+        .imagen-proyecto {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            filter: brightness(0.8);
+            transition: filter 0.3s ease;
+            background-color: #333; /* Fondo gris si no carga la imagen */
+        }
+
+        .tarjeta:hover .imagen-proyecto {
+            filter: brightness(1.1);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            color: white;
+        }
+
+        .tech-tag {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* --- PIE DE PÁGINA --- */
+        footer {
+            background-color: #050505;
+            padding: 80px 0;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="reveal active">
+            <h1>Ing. Eduardo Buendía</h1>
+            <p class="subtitle">Diseño de Producto | Manufactura | Herramentales</p>
+            <p style="color: var(--text-muted); margin-top: 20px;">SolidWorks / Inventor / Ansys</p>
+            <a href="#proyectos" class="btn">Ver Proyectos</a>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="reveal">
+            <h2>Sobre mí</h2>
+            <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 800px;">
+                Ingeniero Mecánico titulado por la <span style="color: white;">UAM Azcapotzalco</span>.
+                Me especializo en transformar problemas complejos en soluciones funcionales mediante 
+                diseño CAD de alta precisión y validación por elemento finito.
+            </p>
+            <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 800px; margin-top: 20px;">
+                Mi enfoque combina la estética del diseño de producto con la ingeniería rigurosa para 
+                asegurar la manufacturabilidad.
+            </p>
+        </div>
+    </section>
+
+    <section id="proyectos" class="container">
+        <h2 class="reveal">Ingeniería Aplicada</h2>
+        
+        <div class="grid-proyectos">
+            
+            <div class="tarjeta reveal">
+                <img src="licuadora.png" alt="Licuadora" class="imagen-proyecto">
+                <p class="tech-tag">Ingeniería Inversa</p>
+                <h3>Licuadora Industrial</h3>
+                <p style="color: var(--text-muted);">
+                    Análisis integral de manufactura. Metrología de precisión y modelado paramétrico 
+                    para validación de ensamble en ABS y Acero Inoxidable.
+                </p>
+            </div>
+
+            <div class="tarjeta reveal">
+                <img src="exoesqueleto.png" alt="Exoesqueleto" class="imagen-proyecto">
+                <p class="tech-tag">Diseño Biomecánico</p>
+                <h3>Exoesqueleto Pasivo</h3>
+                <p style="color: var(--text-muted);">
+                    Dispositivo ergonómico para prevención de lesiones.
+                    Validación estructural FEA para asegurar factor de seguridad ante cargas dinámicas.
+                </p>
+            </div>
+
+            <div class="tarjeta reveal">
+                <img src="extractor.png" alt="Extractor" class="imagen-proyecto">
+                <p class="tech-tag">Herramentales (Fixtures)</p>
+                <h3>Extractor de Baleros</h3>
+                <p style="color: var(--text-muted);">
+                    Solución compacta para mantenimiento en espacios restringidos. 
+                    Accionado neumáticamente y diseñado a medida.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="reveal">
+            <h2>Contacto</h2>
+            <p style="font-size: 1.5rem; color: white;">ing.eduardo.buendia.ramirez@gmail.com</p>
+            <p style="color: var(--text-muted);">+52 55 1804 8946</p>
+            <br>
+            <a href="#">LinkedIn</a>
+            <a href="#">GrabCAD</a>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
