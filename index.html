@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ing. Eduardo Buendía | Portafolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         /* --- ESTILO APPLE DARK MODE PRO (INTACTO) --- */
         :root {
@@ -178,6 +179,77 @@
             .profile-photo { width: 200px; height: 200px; }
             h1 { font-size: 2.5rem; }
         }
+
+        /* --- Estilos del Carrusel --- */
+        
+        .swiper.myProjectCarousel {
+            width: 100%;
+            padding-bottom: 40px; /* Espacio para los puntitos */
+        }
+
+        .project-slide-img {
+            width: 100%;
+            height: 400px; /* Altura uniforme para todas las imágenes */
+            object-fit: contain; /* Ajusta la imagen sin recortarla */
+            background-color: var(--card-bg); /* Usa el fondo gris de tus tarjetas */
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+
+        /* Estilo de los puntitos (Dots) */
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: var(--text-muted); /* Gris claro (#86868b) */
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--accent-color); /* Tu AZUL (#2997ff) */
+            opacity: 1;
+            transform: scale(1.3);
+        }
+
+/* --- ESTILOS PARA LOS ICONOS (TECNOLOGÍAS) --- */
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px; /* Espacio entre iconos */
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover { transform: translateY(-5px); }
+
+        .tech-icon {
+            height: 45px; /* Tamaño de los logos */
+            width: auto;
+            /* Esto vuelve BLANCOS los logos si son negros */
+            filter: brightness(0) invert(1); 
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .tech-item:hover .tech-icon { opacity: 1; }
+
+        .tech-label {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
     </style>
 </head>
 <body>
@@ -186,7 +258,24 @@
         <div class="reveal active">
             <h1>Ing. Eduardo Buendía</h1>
             <p class="subtitle">Diseño de Producto | Manufactura | Herramentales</p>
-            <p style="color: var(--text-muted); margin-top: 20px;">SolidWorks / Inventor / Ansys</p>
+            <div class="tech-stack">
+                
+                <div class="tech-item">
+                    <img src="SOLIDWORKS.png" alt="SolidWorks" class="tech-icon">
+                    <span class="tech-label">SolidWorks</span>
+                </div>
+
+                <div class="tech-item">
+                    <img src="ANSYS.png" alt="Ansys" class="tech-icon">
+                    <span class="tech-label">Ansys</span>
+                </div>
+
+                <div class="tech-item">
+                    <img src="INVENTOR.png" alt="Inventor" class="tech-icon">
+                    <span class="tech-label">Inventor</span>
+                </div>
+
+            </div>
             <a href="#proyectos" class="btn">Ver Proyectos</a>
         </div>
     </header>
@@ -244,11 +333,29 @@
         </div>
     </section>
 
+   
     <div id="modal1" class="modal-overlay" onclick="closeModal('modal1')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal('modal1')">X</button>
             <h2>Licuadora BLACK & DECKER</h2>
-            <img src="licuadora.png" style="width:100%; border-radius:10px; margin-bottom:20px;">
+            
+            <div class="swiper myProjectCarousel">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="licuadora.png" alt="Render Licuadora" class="project-slide-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="licuadora_explosionado.png" alt="Despiece" class="project-slide-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="licuadora_plano.png" alt="Plano Técnico" class="project-slide-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="licuadora_real.png" alt="Producto Real" class="project-slide-img">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
             <div class="modal-details">
                 <h3>Objetivo:</h3>
                 <p>Análisis integral de producto para validación de manufactura y ensamble.</p>
@@ -269,12 +376,30 @@
         </div>
     </div>
 
+  
     <div id="modal2" class="modal-overlay" onclick="closeModal('modal2')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal('modal2')">X</button>
             <h2>Exoesqueleto Pasivo Para Prevención De Lesiones</h2>
             <p class="modal-subtitle">Enfocado en mujeres con actividades de levantamiento repetitivo.</p>
-            <img src="exoesqueleto.png" style="width:100%; border-radius:10px; margin-bottom:20px;">
+            
+            <div class="swiper myProjectCarousel">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="exoesqueleto.png" alt="Render Principal" class="project-slide-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="exoesqueleto_hergonomia.png" alt="Estudio Ergonomía" class="project-slide-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="exoesqueleto_propuestas.png" alt="Propuestas" class="project-slide-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="exoesqueleto_analisis.png" alt="Análisis FEA" class="project-slide-img">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
             <div class="modal-details">
                 <h3>Objetivo:</h3>
                 <p>Desarrollo de un dispositivo de asistencia pasiva diseñado para mitigar el riesgo de lesiones musculoesqueléticas en entornos laborales.</p>
@@ -282,8 +407,8 @@
                 <ul>
                     <li><strong>Investigación y Normativa:</strong> Análisis del estado del arte y estudio de las Normas Oficiales Mexicanas (NOM) aplicables a la ergonomía y manejo de cargas.</li>
                     <li><strong>Diseño Centrado en el Usuario:</strong> Ejecución de un estudio antropométrico específico para la demografía femenina objetivo.</li>
-                    <li><strong>Ingeniería de Detalle:</strong> Desarrollo de tres fases conceptuales (dos propuestas preliminares y un diseño final optimizado), respaldadas por cálculos analíticos de esfuerzos para la selección precisa de materiales.</li>
-                    <li><strong>Validación:</strong> Verificación estructural mediante simulación por Elemento Finito (CAE) y generación de planos de manufactura para su fabricación.</li>
+                    <li><strong>Ingeniería de Detalle:</strong> Desarrollo de tres fases conceptuales, respaldadas por cálculos analíticos de esfuerzos para la selección precisa de materiales.</li>
+                    <li><strong>Validación:</strong> Verificación estructural mediante simulación por Elemento Finito (CAE) y generación de planos de manufactura.</li>
                 </ul>
                 <h3>Desafío:</h3>
                 <p>Lograr un diseño ergonómico y ligero que soporte las cargas dinámicas del movimiento humano.</p>
@@ -293,11 +418,14 @@
         </div>
     </div>
 
-    <div id="modal3" class="modal-overlay" onclick="closeModal('modal3')">
+    
+  <div id="modal3" class="modal-overlay" onclick="closeModal('modal3')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal('modal3')">X</button>
             <h2>Extractor de Baleros</h2>
-            <img src="extractor.png" style="width:100%; border-radius:10px; margin-bottom:20px;">
+            
+            <img src="extractor.png" alt="Extractor de Baleros" class="project-slide-img" style="margin-bottom: 20px;">
+
             <div class="modal-details">
                 <h3>Objetivo:</h3>
                 <p>Desarrollar una solución mecánica a la medida bajo especificaciones estrictas del cliente, resolviendo una problemática de mantenimiento por falta de acceso para herramientas convencionales.</p>
@@ -388,5 +516,28 @@
         });
     </script>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper(".myProjectCarousel", {
+            slidesPerView: 1,      // Muestra 1 imagen a la vez
+            spaceBetween: 30,      // Espacio entre imágenes
+            loop: true,            // Carrusel infinito (gira en bucle)
+            grabCursor: true,      // Manita para arrastrar
+            
+            // AUTOMÁTICO: Se mueve cada 4 segundos
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false, // Sigue girando aunque le den click
+            },
+
+            // PUNTITOS DE NAVEGACIÓN
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+    
 </body>
 </html>
