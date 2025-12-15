@@ -6,7 +6,7 @@
     <title>Ing. Eduardo Buendía | Portafolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- ESTILO APPLE DARK MODE PRO --- */
+        /* --- ESTILO APPLE DARK MODE PRO (INTACTO) --- */
         :root {
             --bg-color: #000000;
             --card-bg: #1c1c1e;
@@ -67,12 +67,12 @@
         .container { width: 85%; max-width: 1000px; margin: auto; padding: 100px 0; }
         h2 { font-size: 2.5rem; margin-bottom: 40px; }
 
-        /* --- SECCIÓN SOBRE MÍ (LADO A LADO) --- */
+        /* --- SECCIÓN SOBRE MÍ --- */
         .about-wrapper {
             display: flex;
             align-items: center;
             gap: 50px;
-            flex-wrap: wrap; /* Para celulares */
+            flex-wrap: wrap; 
         }
 
         .about-text { flex: 1; min-width: 300px; }
@@ -165,6 +165,7 @@
             color: var(--text-main); text-decoration: none;
             background: #1c1c1e; padding: 10px 20px; border-radius: 12px;
             transition: all 0.3s ease; border: 1px solid #333;
+            cursor: pointer;
         }
         .contact-btn:hover { background: #333; border-color: var(--accent-color); transform: translateY(-3px);}
         
@@ -251,14 +252,12 @@
             <div class="modal-details">
                 <h3>Objetivo:</h3>
                 <p>Análisis integral de producto para validación de manufactura y ensamble.</p>
-                
                 <h3>Metodología:</h3>
                 <ul>
                     <li>Desensamble y metrología de precisión de componentes.</li>
                     <li>Identificación de materiales (ABS, Acero Inoxidable, Viton).</li>
                     <li>Modelado paramétrico en SolidWorks y validación de propiedades físicas (Masa Real vs. CAD).</li>
                 </ul>
-
                 <h3>Documentación Técnica y GD&T:</h3>
                 <p>Generación de expedientes técnicos para manufactura bajo normativa estándar.</p>
                 <ul>
@@ -279,7 +278,6 @@
             <div class="modal-details">
                 <h3>Objetivo:</h3>
                 <p>Desarrollo de un dispositivo de asistencia pasiva diseñado para mitigar el riesgo de lesiones musculoesqueléticas en entornos laborales.</p>
-                
                 <h3>Metodología:</h3>
                 <ul>
                     <li><strong>Investigación y Normativa:</strong> Análisis del estado del arte y estudio de las Normas Oficiales Mexicanas (NOM) aplicables a la ergonomía y manejo de cargas.</li>
@@ -287,10 +285,8 @@
                     <li><strong>Ingeniería de Detalle:</strong> Desarrollo de tres fases conceptuales (dos propuestas preliminares y un diseño final optimizado), respaldadas por cálculos analíticos de esfuerzos para la selección precisa de materiales.</li>
                     <li><strong>Validación:</strong> Verificación estructural mediante simulación por Elemento Finito (CAE) y generación de planos de manufactura para su fabricación.</li>
                 </ul>
-
                 <h3>Desafío:</h3>
                 <p>Lograr un diseño ergonómico y ligero que soporte las cargas dinámicas del movimiento humano.</p>
-
                 <h3>Resultados:</h3>
                 <p>Modelo funcional validado mediante simulación de elemento finito (FEA) para asegurar factor de seguridad.</p>
             </div>
@@ -305,16 +301,13 @@
             <div class="modal-details">
                 <h3>Objetivo:</h3>
                 <p>Desarrollar una solución mecánica a la medida bajo especificaciones estrictas del cliente, resolviendo una problemática de mantenimiento por falta de acceso para herramientas convencionales.</p>
-                
                 <h3>Metodología:</h3>
                 <ul>
                     <li><strong>Metrología y Levantamiento:</strong> Toma de mediciones de alta precisión del área de trabajo y componentes involucrados para asegurar la compatibilidad geométrica del diseño.</li>
                     <li><strong>Diseño y Solución:</strong> Desarrollo de un dispositivo compacto accionado mediante pistola neumática, permitiendo la extracción del rodamiento.</li>
                 </ul>
-
                 <h3>Desafío:</h3>
                 <p>Restricciones geométricas y de espacio que impedían el uso de métodos convencionales (prensa hidráulica) para la extracción del componente.</p>
-
                 <h3>Solución:</h3>
                 <p>Diseño de un dispositivo mecánico compacto, validado para ser accionado mediante pistola neumática.</p>
             </div>
@@ -327,9 +320,9 @@
             <p>Estoy disponible para nuevos desarrollos.</p>
             
             <div class="contact-links">
-                <a href="mailto:ing.eduardo.buendia.ramirez@gmail.com" class="contact-btn">
+                <a href="mailto:ing.eduardo.buendia.ramirez@gmail.com" id="emailBtn" class="contact-btn">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    Enviar Correo
+                    <span id="emailText">Enviar Correo</span>
                 </a>
 
                 <a href="https://wa.me/525518048946" target="_blank" class="contact-btn">
@@ -342,7 +335,7 @@
                     LinkedIn
                 </a>
 
-                <a href="cv.pdf" download class="contact-btn" style="border-color: #28a745; color: #28a745;">
+                <a href="cv.pdf" download="Eduardo Buendia Ramirez CV.pdf" class="contact-btn" style="border-color: #28a745; color: #28a745;">
                     <svg class="icon" viewBox="0 0 24 24" style="fill:#28a745;"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
                     Descargar CV
                 </a>
@@ -369,6 +362,30 @@
             document.getElementById(id).classList.remove('open');
             document.body.style.overflow = 'auto'; 
         }
+
+        // LÓGICA INTELIGENTE DE EMAIL
+        const emailBtn = document.getElementById('emailBtn');
+        const emailText = document.getElementById('emailText');
+        const myEmail = "ing.eduardo.buendia.ramirez@gmail.com";
+
+        emailBtn.addEventListener('click', function(e) {
+            // Detectar si es celular (Android, iPhone, etc)
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            // Si NO es celular, bloqueamos y copiamos
+            if (!isMobile) {
+                e.preventDefault(); // Evita que se abra Outlook
+                navigator.clipboard.writeText(myEmail).then(() => {
+                    // Feedback visual sutil (cambia el texto del botón por 2 seg)
+                    const originalText = emailText.innerText;
+                    emailText.innerText = "¡Correo Copiado!";
+                    setTimeout(() => {
+                        emailText.innerText = originalText;
+                    }, 2000);
+                });
+            }
+            // Si es celular, dejamos que haga lo normal (abrir App)
+        });
     </script>
 
 </body>
